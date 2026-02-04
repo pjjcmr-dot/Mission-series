@@ -88,16 +88,22 @@ const dummyProducts = [
 export function ProductList() {
   const [products, setProducts] = useState(dummyProducts);
 
-  // useEffect(() => {
-  //   const getProducts = async () => {
-  //     const res = await fetch(
-  //       "https://panda-market-api.vercel.app/products?page=1&pageSize=10&orderBy=recent",
-  //     );
-  //     const data = await res.json();
-  //     setProducts(data.list);
-  //   };
-  //   getProducts();
-  // }, []); // 의존성 배열이라고 해서 실행이 딱 한번만 된다.
+  useEffect(() => {
+    const getProducts = async () => {
+      const params = new URLSearchParams({
+        page: 1,
+        pageSize: 10,
+        orderBy: "recent",
+      });
+
+      const res = await fetch(
+        `https://panda-market-api.vercel.app/products?${params.toString()}`,
+      );
+      const data = await res.json();
+      setProducts(data.list);
+    };
+    getProducts();
+  }, []); // 의존성 배열이라고 해서 실행이 딱 한번만 된다.
 
   // console.log(products);
 
