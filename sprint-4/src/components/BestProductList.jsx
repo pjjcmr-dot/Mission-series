@@ -65,7 +65,7 @@ export function BestProductList() {
     <ul className="flex gap-6 mt-4">
       {products.map((product) => {
         return (
-          <li>
+          <li key={product.name}>
             <img
               width={282}
               height={282}

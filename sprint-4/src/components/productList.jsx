@@ -1,4 +1,4 @@
-import thumbnail from "../assets/thumbnail.png";
+// import thumbnail from "../assets/thumbnail.png";
 import likeIcon from "../assets/icons/like.svg";
 import { useEffect, useState } from "react";
 
@@ -111,7 +111,7 @@ export function ProductList() {
     <ul className="grid grid-cols-5 gap-6 mt-4">
       {products.map((product) => {
         return (
-          <li>
+          <li key={product.name}>
             <img
               width={221}
               height={221}
