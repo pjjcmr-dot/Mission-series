@@ -1,16 +1,6 @@
 import likeIcon from "../assets/icons/like.svg";
 import { useEffect, useState } from "react";
 
-// const defaultProducts = [
-//   {
-//     src: "",
-//     name: "",
-//     price: "",
-//     title: "",
-//     likeCount: 0,
-//   }
-// ];
-
 const dummyProducts = [
   {
     src: "https://picsum.photos/seed/1/300/300",
@@ -84,15 +74,15 @@ const dummyProducts = [
   },
 ];
 
-export function ProductList() {
-  const [products, setProducts] = useState(dummyProducts);
+export function ProductList({ orderBy = "recent" }) {
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
     const getProducts = async () => {
       const params = new URLSearchParams({
         page: 1,
         pageSize: 10,
-        orderBy: "recent",
+        orderBy: orderBy,
       });
 
       const res = await fetch(
@@ -102,7 +92,7 @@ export function ProductList() {
       setProducts(data.list);
     };
     getProducts();
-  }, []); // 의존성 배열이라고 해서 실행이 딱 한번만 된다.
+  }, [orderBy]); // orderBy가 변경되면 다시 호출
 
   // console.log(products);
 
