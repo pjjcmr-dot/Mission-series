@@ -1,6 +1,5 @@
-import thumbnail from "../assets/thumbnail.png";
 import likeIcon from "../assets/icons/like.svg";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 // const defaultProducts = [
 //   {
@@ -46,7 +45,7 @@ const dummyProducts = [
 ];
 
 export function BestProductList() {
-  const [products, setProducts] = useState(dummyProducts);
+  const [products] = useState(dummyProducts);
 
   // useEffect(() => {
   //   const getBestProducts = async () => {
@@ -83,55 +82,6 @@ export function BestProductList() {
           </li>
         );
       })}
-
-      {/* <li>
-        <img
-          width={282}
-          height={282}
-          src={thumbnail}
-          alt="thumbnail"
-          className="aspect-square rounded-2xl"
-        />
-        <div className="flex flex-col gap-1.5 mt-4 text-[#1F29274]">
-          <h3 className="text-[14px]">아이패드 미니 팝니다</h3>
-          <span className="font-bold">500,000원</span>
-          <div className="text-[12px] flex gap-1">
-            <img src={likeIcon} alt="좋아요" /> 240
-          </div>
-        </div>
-      </li>
-      <li>
-        <img
-          width={282}
-          height={282}
-          src={thumbnail}
-          alt="thumbnail"
-          className="aspect-square rounded-2xl"
-        />
-        <div className="flex flex-col gap-1.5 mt-4 text-[#1F29274]">
-          <h3 className="text-[14px]">아이패드 미니 팝니다</h3>
-          <span className="font-bold">500,000원</span>
-          <div className="text-[12px] flex gap-1">
-            <img src={likeIcon} alt="좋아요" /> 240
-          </div>
-        </div>
-      </li>
-      <li>
-        <img
-          width={282}
-          height={282}
-          src={thumbnail}
-          alt="thumbnail"
-          className="aspect-square rounded-2xl"
-        />
-        <div className="flex flex-col gap-1.5 mt-4 text-[#1F29274]">
-          <h3 className="text-[14px]">아이패드 미니 팝니다</h3>
-          <span className="font-bold">500,000원</span>
-          <div className="text-[12px] flex gap-1">
-            <img src={likeIcon} alt="좋아요" /> 240
-          </div>
-        </div>
-      </li> */}
     </ul>
   );
 }

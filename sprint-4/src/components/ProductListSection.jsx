@@ -1,3 +1,5 @@
+import { ProductList } from "./ProductList";
+
 export function ProductListSection() {
   return (
     <section className="mt-10">

@@ -1,4 +1,3 @@
-// import thumbnail from "../assets/thumbnail.png";
 import likeIcon from "../assets/icons/like.svg";
 import { useEffect, useState } from "react";
 
@@ -111,19 +110,26 @@ export function ProductList() {
     <ul className="grid grid-cols-5 gap-6 mt-4">
       {products.map((product) => {
         return (
-          <li key={product.name}>
+          <li key={product.id || product.name}>
             <img
               width={221}
               height={221}
-              src={product.src}
+              src={
+                product.images?.length > 0
+                  ? product.images[0]
+                  : `https://picsum.photos/seed/${product.id}/300/300`
+              }
               alt="thumbnail"
-              className="aspect-square rounded-2xl"
+              className="aspect-square rounded-2xl object-cover"
             />
             <div className="flex flex-col gap-1.5 mt-4 text-[#1F2937]">
-              <h3 className="text-[14px]">{product.title}</h3>
-              <span className="font-bold">{product.price}</span>
+              <h3 className="text-[14px]">{product.name || product.title}</h3>
+              <span className="font-bold">
+                {product.price?.toLocaleString?.() || product.price}원
+              </span>
               <div className="text-[12px] flex gap-1 text-[#4B5563]">
-                <img src={likeIcon} alt="좋아요" /> {product.likeCount}
+                <img src={likeIcon} alt="좋아요" />{" "}
+                {product.favoriteCount || product.likeCount}
               </div>
             </div>
           </li>
