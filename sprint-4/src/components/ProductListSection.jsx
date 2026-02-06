@@ -1,4 +1,5 @@
 import { ProductList } from "./ProductList";
+import { Pagination } from "./Pagination";
 import searchIcon from "../assets/icons/search.svg";
 import arrowDownIcon from "../assets/icons/arrow-down.svg";
 import { useEffect, useRef, useState } from "react";
@@ -6,6 +7,9 @@ import { useEffect, useRef, useState } from "react";
 export function ProductListSection() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [sortOrder, setSortOrder] = useState("recent");
+  const [keyword, setKeyword] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalCount, setTotalCount] = useState(0);
   const dropdownRef = useRef(null);
 
   useEffect(() => {
@@ -35,7 +39,13 @@ export function ProductListSection() {
 
   const handleSortChange = (value) => {
     setSortOrder(value);
+    setCurrentPage(1);
     setIsDropdownOpen(false);
+  };
+
+  const handleKeywordChange = (e) => {
+    setKeyword(e.target.value);
+    setCurrentPage(1);
   };
 
   return (
@@ -54,6 +64,8 @@ export function ProductListSection() {
             <input
               name="search"
               type="text"
+              value={keyword}
+              onChange={handleKeywordChange}
               placeholder="검색할 상품을 입력해주세요"
               className="pl-11 pr-4 py-2.25 text-[#9CA3AF] bg-[#F3F4F6] rounded-xl outline-0 w-81.25"
             />
@@ -94,7 +106,19 @@ export function ProductListSection() {
         </div>
       </div>
 
-      <ProductList orderBy={sortOrder} />
+      <ProductList
+        orderBy={sortOrder}
+        keyword={keyword}
+        page={currentPage}
+        onTotalCountChange={setTotalCount}
+      />
+      <Pagination
+        totalCount={totalCount}
+        pageSize={10}
+        currentPage={currentPage}
+        onPageChange={setCurrentPage}
+      />
+
     </section>
   );
 }
