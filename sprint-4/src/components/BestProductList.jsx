@@ -1,5 +1,6 @@
 import likeIcon from "../assets/icons/like.svg";
 import { useEffect, useState } from "react";
+import { priceFormat } from "../utils/format";
 
 export function BestProductList() {
   const [products, setProducts] = useState([]);
@@ -39,7 +40,7 @@ export function BestProductList() {
             />
             <div className="flex flex-col gap-1.5 mt-4 text-[#1F2937]">
               <h3 className="text-[14px]">{product.name}</h3>
-              <span className="font-bold">{product.price}원</span>
+              <span className="font-bold">{priceFormat(product.price)}원</span>
               <div className="text-[12px] flex gap-1 text-[#4B5563]">
                 <img src={likeIcon} alt="좋아요" /> {product.favoriteCount}
               </div>

@@ -1,11 +1,28 @@
 import { ProductList } from "./ProductList";
 import searchIcon from "../assets/icons/search.svg";
 import arrowDownIcon from "../assets/icons/arrow-down.svg";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export function ProductListSection() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [sortOrder, setSortOrder] = useState("recent");
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    if (isDropdownOpen) {
+      document.addEventListener("click", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [isDropdownOpen]);
 
   const sortOptions = [
     { value: "recent", label: "최신순" },
@@ -47,13 +64,17 @@ export function ProductListSection() {
           >
             상품 등록하기
           </a>
-          <div className="relative">
+          <div className="relative" ref={dropdownRef}>
             <button
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
               className="flex items-center justify-between gap-1 w-[130px] px-4 py-2 border border-[#E5E7EB] rounded-xl"
             >
               <span>{currentLabel}</span>
-              <img src={arrowDownIcon} alt="정렬" />
+              <img
+                src={arrowDownIcon}
+                alt="정렬"
+                className={`transition-transform ${isDropdownOpen ? "rotate-180" : "rotate-0"}`}
+              />
             </button>
             {isDropdownOpen && (
               <ul className="absolute top-full right-0 mt-1 bg-white border border-[#E5E7EB] rounded-xl shadow-lg z-10 min-w-full">
