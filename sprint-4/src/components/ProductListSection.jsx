@@ -5,14 +5,17 @@ import { useState } from "react";
 
 export function ProductListSection() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [sortOder, setsortoder] = useState("recent");
+  const [sortOrder, setSortOrder] = useState("recent");
 
   const sortOptions = [
     { value: "recent", label: "최신순" },
     { value: "favorite", label: "좋아요순" },
   ];
 
-  const currentLabel = sortOptions.find((opt) => opt.value === sortOder)?.label;
+  const currentLabel = sortOptions.find(
+    (opt) => opt.value === sortOrder,
+  )?.label;
+
   const handleSortChange = (value) => {
     setSortOrder(value);
     setIsDropdownOpen(false);
