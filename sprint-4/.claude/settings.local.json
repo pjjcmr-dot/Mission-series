@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git mv:*)",
+      "Bash(dir:*)",
+      "Bash(git config:*)",
+      "Bash(git reset:*)",
+      "Bash(git checkout:*)",
+      "Bash(ren:*)",
+      "Bash(git add:*)",
+      "Bash(curl:*)",
+      "Bash(python3:*)"
+    ]
+  }
+}
